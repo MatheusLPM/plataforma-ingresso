@@ -1,0 +1,13 @@
+
+{
+    "name": "plataforma-ingresso/app",
+    "description": "Plataforma de Ingresso",
+    "type": "project",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^12.0"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
