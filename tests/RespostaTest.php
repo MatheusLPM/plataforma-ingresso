@@ -19,4 +19,15 @@ class RespostaTest extends TestCase
         $resultado = $resposta->responder('/caminhodesconhecido', 'teste');
         $this->assertSame(404, $resultado['status']);
     }
+
+    public function test_saude_responde_200_com_versao() :void
+    {
+        $resposta = new Resposta();
+        $resultado = $resposta->responder('/saude', 'teste');
+        $this->assertSame(200, $resultado['status']);
+        $this->assertSame(
+            ['status' => 'ok', 'versao' => 'teste'],
+            json_decode($resultado['corpo'], true)
+        );
+    }
 }
