@@ -3,19 +3,19 @@
 namespace Src;
 class Resposta
 {
-    public function responder(string $rota, string $mensagem)
+    public function responder(string $caminho, string $versao) :array
     {
-        if ($rota === '/') {
+        if ($caminho === '/') {
             return [
                 'status' => 200,
-                'rota' => $rota,
-                'mensagem' => $mensagem
+                'rota' => $caminho,
+                'mensagem' => $versao
             ];
         }
         return [
             'status' => 404,
-            'rota' => $rota,
-            'mensagem' => $mensagem
+            'rota' => $caminho,
+            'mensagem' => $versao
         ];
     }
 }
