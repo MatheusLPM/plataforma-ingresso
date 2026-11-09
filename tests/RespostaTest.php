@@ -13,7 +13,7 @@ class RespostaTest extends TestCase
         $this->assertSame(200, $resultado['status']);
     }
 
-    public function test_raiz_responde_pagina_incial() :void
+    public function test_raiz_responde_pagina_inicial() :void
     {
         $resposta = new Resposta();
         $resultado = $resposta->responder('/', 'teste');
