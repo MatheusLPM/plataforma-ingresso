@@ -1,0 +1,7 @@
+## Módulo 01 - Fase 1
+
+### 2026-11-08: todas as rotas respondendo 500, sem motivo no log
+
+Estava escrevendo o `public/index.php` para chamar a classe `Resposta` e enviar o status e o corpo quando todas as rotas começaram a responder 500. `/`, `/teste` e `/saude` devolviam só `Erro interno do servidor`, e o PHPUnit continuava verde. Fui verificar com o `curl -i` e depois em  `docker compose logs php`, mas só aparecia `"GET /index.php" 500`, sem mostrar o motivo. O problema era o `$this->resposta = new \Src\Resposta();` que eu tinha colocado no `index.php`: `$this` só existe dentro de método de classe, e o `index.php` é um script solto. O PHP lançava um `Error`, meu `catch (Throwable $e)` pegava e respondia 500, e como o `catch` não registrava nada, o erro sumia. Troquei por uma variável comum, `$resposta`, e coloquei `error_log($e);` no `catch`. Depois provoquei um erro de propósito com um `throw` temporário: o `curl` entao mostrou só a mensagem genérica e o log trouxe todo o conteudo nao somente a msg. Aprendi que um `catch` que não registra o erro esconde o problema de quem precisa consertar, e que teste verde não garante que o site funciona, porque os testes cobriam a `Resposta` e não o `index.php`.
+
+Tive muita dificuldade tambem na configuracao de do default.conf do nginx e para configurar o phpunit.
